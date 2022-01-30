@@ -1,0 +1,25 @@
+name: Update nuclear-player-bin
+
+on: workflow_dispatch
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+    - uses: actions/checkout@master
+    - name: Checkout from AUR
+      uses: actions/checkout@v2
+      with:
+        repo: https://aur.archlinux.org/nuclear-player-bin.git
+        destdir: /tmp/nuclear-player-bin
+        branch: master
+    - name: Use Node.js 14
+      uses: actions/setup-node@master
+      with:
+        version: '14'
+        cache: npm
+    - name: Install dependencies
+      run: npm ci
+    - name: Run the update script
+      run: npm start
