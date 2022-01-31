@@ -21,12 +21,11 @@ jobs:
     - name: Run the update script
       run: npm start
     - name: Git add, commit and push
-      uses: actions/checkout@master
-      with:
-        repository: https://aur.archlinux.org/nuclear-player-bin.git
-        path: /tmp/nuclear-player-bin
-        branch: master
-        run: |
-          git config user.name nukeop
-          git config user.email nuclear@gumblert.tech
-          git log
+      run: |
+        cd /tmp/nuclear-player-bin
+        git config user.name nukeop
+        git config user.email nuclear@gumblert.tech
+        git add -A
+        git commit -m "Update nuclear-player-bin"
+        git log
+        git push origin master
