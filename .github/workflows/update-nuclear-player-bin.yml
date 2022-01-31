@@ -11,7 +11,7 @@ jobs:
     - name: Install SSH key
       uses: shimataro/ssh-key-action@v2
       with:
-      key: ${{ secrets.SSH_KEY }}
+        key: ${{ secrets.SSH_KEY }}
     - name: Checkout from AUR
       run: |
         git clone ssh://aur@aur.archlinux.org/nuclear-player-bin.git /tmp/nuclear-player-bin
