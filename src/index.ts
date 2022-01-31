@@ -52,7 +52,7 @@ const options = program.opts();
   const desktopHash = await Md5.hashStr(desktopTemplate);
 
   const now = new Date();
-  const pkgver = `${now.getFullYear()}${now.getMonth() + 1}${now.getDate()}`;
+  const pkgver = `${now.getFullYear()}${now.getMonth() + 1}${now.getDate()}-${debHash}`;
   console.log(`Setting pkgver: ${pkgver}`);
   console.log(`Debian package hash: ${debHash}`);
   console.log(`Desktop hash: ${desktopHash}`);
