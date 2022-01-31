@@ -9,11 +9,8 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Checkout from AUR
-      uses: actions/checkout@master
-      with:
-        repository: https://aur.archlinux.org/nuclear-player-bin.git
-        path: /tmp/nuclear-player-bin
-        branch: master
+      run: |
+        git clone https://aur.archlinux.org/nuclear-player-bin.git /tmp/nuclear-player-bin
     - name: Use Node.js 14
       uses: actions/setup-node@master
       with:
