@@ -5,6 +5,7 @@ repurl=https://github.com/nukeop/nuclear
 commidfull=$(git ls-remote $repurl.git -tags v$pkgver)
 commid=\${commidfull:0:6}
 pkgrel=2
+epoch={{epoch}}
 pkgdesc="A free, multiplatform music player app that streams from multiple sources."
 arch=('x86_64')
 url="http://nuclear.js.org/"

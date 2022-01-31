@@ -58,6 +58,7 @@ const options = program.opts();
   console.log(`Desktop hash: ${desktopHash}`);
   const pkgbuild = handlebars.compile(pkgbuildTemplate)({
     pkgver,
+    epoch: now.valueOf(),
     deburl: options.debUrl,
     debmd5: debHash,
     desktopmd5: desktopHash,
