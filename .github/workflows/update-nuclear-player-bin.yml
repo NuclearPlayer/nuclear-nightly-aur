@@ -9,10 +9,10 @@ jobs:
     steps:
     - uses: actions/checkout@master
     - name: Checkout from AUR
-      uses: actions/checkout@v2
+      uses: actions/checkout@master
       with:
-        repo: https://aur.archlinux.org/nuclear-player-bin.git
-        destdir: /tmp/nuclear-player-bin
+        repository: https://aur.archlinux.org/nuclear-player-bin.git
+        path: /tmp/nuclear-player-bin
         branch: master
     - name: Use Node.js 14
       uses: actions/setup-node@master
@@ -23,3 +23,13 @@ jobs:
       run: npm ci
     - name: Run the update script
       run: npm start
+    - name: Git add, commit and push
+      uses: actions/checkout@master
+      with:
+        repository: https://aur.archlinux.org/nuclear-player-bin.git
+        path: /tmp/nuclear-player-bin
+        branch: master
+        run: |
+          git config user.name nukeop
+          git config user.email nuclear@gumblert.tech
+          git log

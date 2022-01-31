@@ -8,6 +8,7 @@ import handlebars from "handlebars";
 
 import desktopTemplate from "./data/nuclear-player-bin/nuclear.desktop.template";
 import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
+import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
 
 program
   .option(
@@ -62,5 +63,27 @@ const options = program.opts();
     desktopmd5: desktopHash,
   });
 
-  console.log(pkgbuild);
+  const srcinfo = handlebars.compile(srcinfoTemplate)({
+    pkgver,
+    deburl: options.debUrl,
+    debmd5: debHash,
+    desktopmd5: desktopHash,
+  });
+
+  try {
+    await fs.promises.writeFile(
+      path.join(options.aurRepoPath, "PKGBUILD"),
+      pkgbuild
+    );
+    await fs.promises.writeFile(
+      path.join(options.aurRepoPath, "nuclear.desktop"),
+      desktopTemplate
+    );
+    await fs.promises.writeFile(
+      path.join(options.aurRepoPath, ".SRCINFO"),
+      srcinfo
+    );
+  } catch (e) {
+    console.error("Error writing files", e);
+  }
 })();
