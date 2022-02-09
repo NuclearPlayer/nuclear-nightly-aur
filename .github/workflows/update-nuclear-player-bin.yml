@@ -1,7 +1,6 @@
 name: Update nuclear-player-bin
 
-on: 
-  workflow_dispatch:
+on:
   repository_dispatch:
 
 jobs:
@@ -26,7 +25,7 @@ jobs:
     - name: Install dependencies
       run: npm ci
     - name: Run the update script
-      run: npm start
+      run: npm start -- --tag ${{ github.event.client_payload.tag }}
     - name: Git add, commit and push
       run: |
         cd /tmp/nuclear-player-bin

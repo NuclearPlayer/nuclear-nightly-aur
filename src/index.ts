@@ -10,16 +10,14 @@ import desktopTemplate from "./data/nuclear-player-bin/nuclear.desktop.template"
 import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
 import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
 
+const packageUrlTemplate = "https://github.com/nukeop/nuclear/releases/download/{{tag}}/nuclear-{{tag}}.deb";
+const packageFilenameTemplate = "nuclear-{{tag}}.deb";
+
 program
   .option(
-    "-u, --deb-url <url>",
-    "Debian package URL",
-    "https://github.com/nukeop/nuclear/releases/download/nightly/nuclear-nightly.deb"
-  )
-  .option(
-    "--deb-filename <filename>",
-    "Debian package filename",
-    "nuclear-nightly.deb"
+    "--tag <url>",
+    "tag of the latest release",
+    "nightly"
   )
   .option("--temp-dir <dir>", "Temporary directory name", "temp")
   .option(
@@ -31,7 +29,9 @@ program.parse();
 const options = program.opts();
 
 (async () => {
-  const localDebPath = path.join(options.tempDir, options.debFilename);
+  const packageUrl = handlebars.compile(packageUrlTemplate)({ tag: options.tag });
+  const packageFilename = handlebars.compile(packageFilenameTemplate)({ tag: options.tag });
+  const localDebPath = path.join(options.tempDir, packageFilename);
 
   try {
     await fs.promises.access(options.tempDir);
@@ -43,8 +43,8 @@ const options = program.opts();
     await fs.promises.access(localDebPath, fs.constants.F_OK);
     console.log("Debian package already exists");
   } catch (e) {
-    console.log(`Downloading ${options.debUrl}`);
-    await download(options.debUrl, options.tempDir);
+    console.log(`Downloading ${packageUrl}`);
+    await download(packageUrl, options.tempDir);
     console.log("Downloaded");
   }
 
@@ -59,14 +59,14 @@ const options = program.opts();
   const pkgbuild = handlebars.compile(pkgbuildTemplate)({
     pkgver,
     epoch: now.valueOf(),
-    deburl: options.debUrl,
+    deburl: packageUrl,
     debmd5: debHash,
     desktopmd5: desktopHash,
   });
 
   const srcinfo = handlebars.compile(srcinfoTemplate)({
     pkgver,
-    deburl: options.debUrl,
+    deburl: packageUrl,
     debmd5: debHash,
     desktopmd5: desktopHash,
   });
