@@ -2,6 +2,7 @@ name: Update nuclear-player-bin
 
 on:
   repository_dispatch:
+  workflow_dispatch:
 
 jobs:
   update:
