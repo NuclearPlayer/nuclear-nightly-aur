@@ -1,20 +1,19 @@
 export default `pkgbase = nuclear-player-bin
-pkgdesc = A free, multiplatform music player app that streams from multiple sources.
-pkgver = {{pkgver}}
-pkgrel = 2
-url = http://nuclear.js.org
-install = nuclear-player-bin.install
-arch = x86_64
-license = AGPL-3.0
-depends = libnotify
-depends = libappindicator-gtk3
-depends = libxtst
-depends = nss
-source = {{deburl}}
-source = nuclear.desktop
-md5sums = {{debmd5}}
-md5sums = {{desktopmd5}}
+	pkgdesc = A free, multiplatform music player app that streams from multiple sources.
+	pkgver = {{pkgver}}
+	pkgrel = 3
+	url = http://nuclear.js.org
+	install = nuclear-player-bin.install
+	arch = x86_64
+	license = GPL3
+	depends = libnotify
+	depends = libappindicator-gtk3
+	depends = libxtst
+	depends = nss
+	provides = nuclear-player
+	source = https://github.com/nukeop/nuclear/releases/download/v{{pkgver}}/nuclear-v{{pkgver}}.deb
+	source = https://raw.githubusercontent.com/nukeop/nuclear/v{{pkgver}}/LICENSE
+	sha256sums = {{sha256sum}}
+	sha256sums = SKIP
 
-pkgname = nuclear-player-bin
-
-`;
+pkgname = nuclear-player-bin`;
