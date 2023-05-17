@@ -7,6 +7,7 @@ import md5File from "md5-file";
 import handlebars from "handlebars";
 
 import desktopTemplate from "./data/nuclear-player-bin/nuclear.desktop.template";
+import installTemplate from "./data/nuclear-player-bin/nuclear-player-bin.install.template";
 import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
 import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
 
