@@ -13,7 +13,7 @@ export default `pkgbase = nuclear-player-bin
 	provides = nuclear-player
 	source = https://github.com/nukeop/nuclear/releases/download/v{{pkgver}}/nuclear-v{{pkgver}}.deb
 	source = https://raw.githubusercontent.com/nukeop/nuclear/v{{pkgver}}/LICENSE
-	sha256sums = {{sha256sum}}
+	sha256sums = {{debsha256}}
 	sha256sums = SKIP
 
 pkgname = nuclear-player-bin`;
