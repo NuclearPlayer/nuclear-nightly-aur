@@ -72,12 +72,12 @@ const options = program.opts();
       pkgbuild
     );
     await fs.promises.writeFile(
-      path.join(options.aurRepoPath, "nuclear.desktop"),
-      desktopTemplate
-    );
-    await fs.promises.writeFile(
       path.join(options.aurRepoPath, ".SRCINFO"),
       srcinfo
+    );
+    await fs.promises.writeFile(
+      path.join(options.aurRepoPath, "nuclear-player-bin.install"),
+      installTemplate
     );
   } catch (e) {
     console.error("Error writing files", e);
