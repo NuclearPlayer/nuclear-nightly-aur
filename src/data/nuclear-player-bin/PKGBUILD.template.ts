@@ -13,8 +13,8 @@ license=(GPL3)
 depends=(libnotify libappindicator-gtk3 libxtst nss )
 install=\$pkgname.install
 source=(
-    https://github.com/nukeop/nuclear/releases/download/v{{pkgver}}/nuclear-v{{pkgver}}.deb
-    https://raw.githubusercontent.com/nukeop/nuclear/v$pkgver/LICENSE
+    https://github.com/nukeop/nuclear/releases/download/v\$pkgver/nuclear-v\$pkgver.deb
+    https://raw.githubusercontent.com/nukeop/nuclear/v\$pkgver/LICENSE
 )
 sha256sums=({{debsha256}}
             SKIP)
