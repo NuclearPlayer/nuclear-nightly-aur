@@ -46,16 +46,14 @@ const options = program.opts();
     await download(packageUrl, options.tempDir);
     console.log("Downloaded");
   }
-
+  
   const debHash = await hasha.fromFile(localDebPath, { algorithm: "sha256" });
 
-  const now = new Date();
-  const pkgver = `${options.tag}`;
+  const pkgver = `${options.tag.replace('v', '')}`;
   console.log(`Setting pkgver: ${pkgver}`);
   console.log(`Debian package hash: ${debHash}`);
   const pkgbuild = handlebars.compile(pkgbuildTemplate)({
     pkgver,
-    epoch: now.valueOf(),
     deburl: packageUrl,
     debsha256: debHash
   });
