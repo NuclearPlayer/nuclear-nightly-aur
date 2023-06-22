@@ -1,14 +1,13 @@
 import fs from "fs";
 import path from "path";
 import { program } from "commander";
-import { Md5 } from "ts-md5/dist/md5";
 import download from "download";
-import md5File from "md5-file";
 import handlebars from "handlebars";
 
-import desktopTemplate from "./data/nuclear-player-bin/nuclear.desktop.template";
+import installTemplate from "./data/nuclear-player-bin/nuclear-player-bin.install.template";
 import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
 import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
+import hasha from "hasha";
 
 const packageUrlTemplate = "https://github.com/nukeop/nuclear/releases/download/{{tag}}/nuclear-{{tag}}.deb";
 const packageFilenameTemplate = "nuclear-{{tag}}.deb";
@@ -47,28 +46,22 @@ const options = program.opts();
     await download(packageUrl, options.tempDir);
     console.log("Downloaded");
   }
+  
+  const debHash = await hasha.fromFile(localDebPath, { algorithm: "sha256" });
 
-  const debHash = await md5File(localDebPath);
-  const desktopHash = await Md5.hashStr(desktopTemplate);
-
-  const now = new Date();
-  const pkgver = `${options.tag}`;
+  const pkgver = `${options.tag.replace('v', '')}`;
   console.log(`Setting pkgver: ${pkgver}`);
   console.log(`Debian package hash: ${debHash}`);
-  console.log(`Desktop hash: ${desktopHash}`);
   const pkgbuild = handlebars.compile(pkgbuildTemplate)({
     pkgver,
-    epoch: now.valueOf(),
     deburl: packageUrl,
-    debmd5: debHash,
-    desktopmd5: desktopHash,
+    debsha256: debHash
   });
 
   const srcinfo = handlebars.compile(srcinfoTemplate)({
     pkgver,
     deburl: packageUrl,
-    debmd5: debHash,
-    desktopmd5: desktopHash,
+    debsha256: debHash,
   });
 
   try {
@@ -77,12 +70,12 @@ const options = program.opts();
       pkgbuild
     );
     await fs.promises.writeFile(
-      path.join(options.aurRepoPath, "nuclear.desktop"),
-      desktopTemplate
-    );
-    await fs.promises.writeFile(
       path.join(options.aurRepoPath, ".SRCINFO"),
       srcinfo
+    );
+    await fs.promises.writeFile(
+      path.join(options.aurRepoPath, "nuclear-player-bin.install"),
+      installTemplate
     );
   } catch (e) {
     console.error("Error writing files", e);

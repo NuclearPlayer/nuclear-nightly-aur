@@ -29,7 +29,6 @@
   "dependencies": {
     "commander": "^9.0.0",
     "download": "^8.0.0",
-    "md5-file": "^5.0.0",
-    "ts-md5": "^1.2.11"
+    "hasha": "^5.2.2"
   }
 }
