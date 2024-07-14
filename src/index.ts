@@ -9,8 +9,8 @@ import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
 import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
 import hasha from "hasha";
 
-const packageUrlTemplate = "https://github.com/nukeop/nuclear/releases/download/{{tag}}/nuclear-{{tag}}.deb";
-const packageFilenameTemplate = "nuclear-{{tag}}.deb";
+const packageUrlTemplate = "https://github.com/nukeop/nuclear/releases/download/{{tag}}/nuclear-{{tag}}-amd64.deb";
+const packageFilenameTemplate = "nuclear-{{tag}}-amd64.deb";
 
 program
   .option(
