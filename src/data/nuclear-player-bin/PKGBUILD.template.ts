@@ -9,7 +9,7 @@ pkgdesc='A free, multiplatform music player app that streams from multiple sourc
 arch=(x86_64)
 url='http://nuclear.js.org'
 provides=(\$_pkgname)
-license=(GPL3)
+license=('GPL-3.0-only')
 depends=(libnotify libappindicator-gtk3 libxtst nss)
 source=(
     https://github.com/nukeop/nuclear/releases/download/v\$pkgver/nuclear-v\$pkgver-amd64.deb
