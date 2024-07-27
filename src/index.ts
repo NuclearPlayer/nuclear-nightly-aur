@@ -4,7 +4,6 @@ import { program } from "commander";
 import download from "download";
 import handlebars from "handlebars";
 
-import installTemplate from "./data/nuclear-player-bin/nuclear-player-bin.install.template";
 import pkgbuildTemplate from "./data/nuclear-player-bin/PKGBUILD.template";
 import srcinfoTemplate from "./data/nuclear-player-bin/.SRCINFO.template";
 import hasha from "hasha";
@@ -72,10 +71,6 @@ const options = program.opts();
     await fs.promises.writeFile(
       path.join(options.aurRepoPath, ".SRCINFO"),
       srcinfo
-    );
-    await fs.promises.writeFile(
-      path.join(options.aurRepoPath, "nuclear-player-bin.install"),
-      installTemplate
     );
   } catch (e) {
     console.error("Error writing files", e);

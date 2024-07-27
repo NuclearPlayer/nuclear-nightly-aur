@@ -10,8 +10,7 @@ arch=(x86_64)
 url='http://nuclear.js.org'
 provides=(\$_pkgname)
 license=(GPL3)
-depends=(libnotify libappindicator-gtk3 libxtst nss )
-install=\$pkgname.install
+depends=(libnotify libappindicator-gtk3 libxtst nss)
 source=(
     https://github.com/nukeop/nuclear/releases/download/v\$pkgver/nuclear-v\$pkgver-amd64.deb
     https://raw.githubusercontent.com/nukeop/nuclear/v\$pkgver/LICENSE
@@ -28,4 +27,6 @@ package()   {
     cp -art "\$pkgdir" opt
     cp -art "\$pkgdir" usr
     install -Dm0644 -t "\$pkgdir/usr/share/licenses/\$_pkgname" LICENSE
+    mkdir -p "$pkgdir/usr/bin/"
+    ln -sf "/opt/nuclear/nuclear" "$pkgdir/usr/bin/nuclear"
 }`;
