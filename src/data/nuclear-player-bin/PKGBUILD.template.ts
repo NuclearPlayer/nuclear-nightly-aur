@@ -24,11 +24,11 @@ prepare() {
 
 package()   {
     iconDir=usr/share/icons/hicolor
-    scalableDir="$iconDir/scalable"
+    scalableDir="$iconDir/scalable/apps"
     install -dm0755 "\$pkgdir/"{opt,usr}
-    mv "$iconDir"/0x0 "$scalableDir"
-    rm "$scalableDir"/apps/nuclear.*
-    cp -a opt/nuclear/resources/media/presskit/icons/scalable/nuclear-icon.svg "$scalableDir"/apps/nuclear.svg
+    rm -rf "$iconDir"/*
+    mkdir -p "$scalableDir"
+    cp -a opt/nuclear/resources/media/presskit/icons/scalable/nuclear-icon.svg "$scalableDir"/nuclear.svg
     cp -art "\$pkgdir" opt
     cp -art "\$pkgdir" usr
     install -Dm0644 -t "\$pkgdir/usr/share/licenses/\$_pkgname" LICENSE
