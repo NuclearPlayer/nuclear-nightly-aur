@@ -4,7 +4,7 @@ export default `# Maintainer: nukeop <nuclear at gumblert dot tech>
 pkgname=nuclear-player-bin
 _pkgname=\${pkgname%-bin}
 pkgver={{pkgver}}
-pkgrel=3
+pkgrel=1
 pkgdesc='A free, multiplatform music player app that streams from multiple sources.'
 arch=(x86_64)
 url='http://nuclear.js.org'
