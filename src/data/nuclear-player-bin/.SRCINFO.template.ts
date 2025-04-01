@@ -1,7 +1,7 @@
 export default `pkgbase = nuclear-player-bin
 	pkgdesc = A free, multiplatform music player app that streams from multiple sources.
 	pkgver = {{pkgver}}
-	pkgrel = 3
+	pkgrel = 1
 	url = http://nuclear.js.org
 	install = nuclear-player-bin.install
 	arch = x86_64
